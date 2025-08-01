@@ -1,6 +1,9 @@
+import type { JSX } from "react";
+
 export type ButtonProps = {
-    label: string,
-    onClick?: () => {}
-    className?: string,
-    type?: "button" | "submit" | "reset"
-}
+  label: string;
+  icon?: JSX.Element;
+  onClick?: () => void;
+  className?: string;
+  type?: "button" | "submit" | "reset";
+};

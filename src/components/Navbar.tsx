@@ -9,7 +9,7 @@ export default function Navbar() {
                     <Header />
                 </div>
                 <div>
-                    <Button label="Sign In" type="button" />
+                    <Button label="Create" type="button" />
                 </div>
             </nav>
         </>
