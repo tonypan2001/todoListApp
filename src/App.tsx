@@ -1,11 +1,12 @@
 import "./App.css";
 import MainLayout from "./layouts/MainLayout";
+import Home from "./pages/Home";
 
 function App() {
 
   return(
     <MainLayout>
-      <h1>TodoList</h1>
+      <Home />
     </MainLayout>
   )
 }
