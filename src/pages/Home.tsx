@@ -5,9 +5,9 @@ import Input from "../components/Input";
 export default function Home() {
     return (
         <>
-            <div className="flex justify-between items-center p-4 mt-4 shadow-md">
-                <div className="flex items-end">
-                    <div className="flex flex-col justify-between items-start">
+            <div className="flex justify-between items-center p-4 mt-4 gap-4 shadow-md">
+                <div className="flex items-end w-full">
+                    <div className="flex flex-col justify-between items-start w-full">
                         <h1>Search your tasks</h1>
                         <Input className="mt-2" placeholder="Type something..."/>
                     </div>
@@ -15,7 +15,7 @@ export default function Home() {
                         <Button icon={<FaSearch />} label="Search" />
                     </div>
                 </div>
-                <div className="flex items-start">
+                <div className="flex justify-center items-center w-full">
                     <div className="w-[60px] h-[60px] flex items-center justify-center border-2 rounded-4xl shadow-lg">
                         <h1 className="font-bold">100%</h1>
                     </div>

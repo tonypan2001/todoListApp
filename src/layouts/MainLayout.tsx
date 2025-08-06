@@ -7,9 +7,11 @@ type Props = {
 
 export default function MainLayout({children}: Props) {
     return(
-        <div className="min-h-screen">
-            <Navbar />
-            <main>{children}</main>
+        <div className="min-h-screen w-full">
+            <main className="max-w-5xl mx-auto px-4 py-6">
+                <Navbar />
+                {children}
+            </main>
         </div>
     )
 }
