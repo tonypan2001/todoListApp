@@ -1,5 +1,5 @@
 export type ModalProps = {
     label?: string;
-    onClick?: () => void;
+    onClose?: () => void;
     className?: string;
   };

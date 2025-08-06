@@ -9,7 +9,7 @@ export default function Navbar() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     return(
         <>
-            {isModalOpen && <Modal />}
+            {isModalOpen && <Modal onClose={() => setIsModalOpen(false)}/>}
             <nav className="flex justify-between items-center p-4 shadow-md">
                 <div className="flex flex-col items-start">
                     <Header className="flex flex-row justify-between items-center gap-2">

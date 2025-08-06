@@ -1,21 +1,39 @@
-import { FaXmark  } from "react-icons/fa6";
+import type { ModalProps } from "../types/modal.types";
+import { FaXmark } from "react-icons/fa6";
 import Button from "./Button";
 import Header from "./Header";
+import Input from "./Input";
 
-export default function Modal() {
+export default function Modal(props: ModalProps) {
     return (
         <>
-            <div className="fixed inset-0 bg-black opacity-50"></div>
-            <div className="fixed flex justify-center items-center z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div className="bg-white p-4 w-100">
-                    <div className=" flex justify-between items-center">
+            {/* Overlay */}
+            <div
+                className="fixed inset-0 bg-black opacity-50 z-40"
+                onClick={props.onClose}
+            ></div>
+
+
+            {/* Modal Container */}
+            <div className="fixed inset-0 z-50 flex items-center justify-center">
+                <div className="relative bg-white p-6 w-full max-w-md shadow-xl">
+                    {/* Header */}
+                    <div className="flex justify-between items-center mb-4">
                         <Header>Create Todo</Header>
-                        <Button className="absolute top-0 right-0" icon={<FaXmark  />} type="button" />
+                        <Button
+                            onClick={props.onClose}
+                            icon={<FaXmark/>}
+                        >
+                        </Button>
                     </div>
+
+                    {/* Form */}
                     <form>
-                        <div className="flex flex-col gap-2">
-                            <label htmlFor="title">Title</label>
-                            <input type="text" id="title" className="border border-gray-300 p-2" />
+                        <div className="flex flex-col gap-2 items-start">
+                            <label htmlFor="title" className="font-medium">
+                                Title
+                            </label>
+                            <Input placeholder="Enter title task"/>
                         </div>
                     </form>
                 </div>
