@@ -39,7 +39,7 @@ export default function Navbar() {
                     </div>
                 </form>
                 <div className="flex items-center mt-4">
-                    <Button type="button" icon={<IoIosCreate />} label="Create Task" className="w-full rounded-4xl text-xl" />
+                    <Button type="submit" icon={<IoIosCreate />} label="Create Task" className="w-full rounded-4xl text-xl" />
                 </div>
             </Modal>}
 
