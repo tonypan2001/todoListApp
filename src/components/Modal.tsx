@@ -19,7 +19,7 @@ export default function Modal(props: ModalProps) {
                 <div className="relative bg-white p-6 w-full max-w-md shadow-xl">
                     {/* Header */}
                     <div className="flex justify-between items-center mb-4">
-                        <Header>Create Task</Header>
+                        <Header>{props.label}</Header>
                         <Button
                             onClick={props.onClose}
                             icon={<FaXmark />}

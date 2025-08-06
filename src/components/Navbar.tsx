@@ -17,7 +17,7 @@ export default function Navbar() {
     return (
         <>
             {/*Modal Form*/}
-            {isModalOpen && <Modal onClose={() => setIsModalOpen(false)}>
+            {isModalOpen && <Modal label="Create Task" onClose={() => setIsModalOpen(false)}>
                 <form className="flex flex-col gap-2">
                     <div className="flex flex-col gap-2 items-start">
                         <label>
