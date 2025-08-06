@@ -32,30 +32,8 @@ export default function Modal(props: ModalProps) {
                         </Button>
                     </div>
 
-                    {/* Form */}
-                    <form className="flex flex-col gap-2">
-                        <div className="flex flex-col gap-2 items-start">
-                            <label>
-                                Title
-                            </label>
-                            <Input placeholder="Enter title" />
-                        </div>
-                        <div className="flex flex-col gap-2 items-start">
-                            <label>
-                                Task description
-                            </label>
-                            <Input placeholder="Enter description" useTextArea={true} />
-                        </div>
-                        <div className="flex flex-col gap-2 items-start">
-                            <label>
-                                Task color
-                            </label>
-                            <Dropdown label="Choose a color" items={["Red", "Green", "Blue"]} onSelect={handleSelect}/>
-                        </div>
-                    </form>
-                    <div className="flex items-center mt-4">
-                        <Button type="button" icon={<IoIosCreate />} label="Create Task" className="w-full rounded-4xl text-xl"/>
-                    </div>
+                    {props.children}
+
                 </div>
             </div>
         </>
