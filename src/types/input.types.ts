@@ -3,4 +3,5 @@ export type InputProps = {
     error?: string;
     className?: string;
     placeholder?: string;
+    useTextArea?: boolean;
 }
