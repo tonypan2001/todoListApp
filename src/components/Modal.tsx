@@ -1,15 +1,10 @@
 import type { ModalProps } from "../types/modal.types";
 import { FaXmark } from "react-icons/fa6";
-import { IoIosCreate } from "react-icons/io";
 import Button from "./Button";
 import Header from "./Header";
-import Input from "./Input";
-import Dropdown from "./Dropdown";
 
 export default function Modal(props: ModalProps) {
-    const handleSelect = (item: string) => {
-        console.log("You selected:", item);
-    };
+    
     return (
         <>
             {/* Overlay */}
