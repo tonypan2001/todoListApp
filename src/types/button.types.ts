@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 
 export type ButtonProps = {
-  label: string;
+  label?: string;
   icon?: JSX.Element;
   onClick?: () => void;
   className?: string;

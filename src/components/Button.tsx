@@ -4,7 +4,7 @@ export default function Button (props: ButtonProps) {
     return (
         <button
             onClick={props.onClick}
-            className="flex justify-content-between gap-2 items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
+            className={`flex justify-content-between gap-2 items-center px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 cursor-pointer ${props.className}`}
         >
             {props.icon}
             {props.label}

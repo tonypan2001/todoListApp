@@ -1,3 +1,5 @@
-export default function Header({children}: {children: React.ReactNode}) {
-    return <h1 className="text-2xl font-bold text-black">{children}</h1>
+import type { HeaderProps } from "../types/header.types";
+
+export default function Header(props: HeaderProps) {
+    return <h1 className={`text-2xl font-bold text-black ${props.className}`}>{props.children}</h1>
 }
