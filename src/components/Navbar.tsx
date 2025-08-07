@@ -7,6 +7,7 @@ import Modal from "./Modal";
 import Input from "./Input";
 import Dropdown from "./Dropdown";
 import { IoIosCreate } from "react-icons/io";
+import Container from "./Container";
 
 export default function Navbar() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,7 +44,7 @@ export default function Navbar() {
                 </div>
             </Modal>}
 
-            <nav className="flex justify-between items-center p-4 shadow-md rounded-xl">
+            <Container>
                 <div className="flex flex-col items-start">
                     <Header className="flex flex-row justify-between items-center gap-2">
                         <FaCalendarCheck className="text-[var(--primary)]" />
@@ -56,7 +57,7 @@ export default function Navbar() {
                     <div className="w-px h-6 bg-gray-300" />
                     <Button icon={<FaUserCircle />} label="Account" type="button" className="bg-[var(--primary-dark)] rounded-full" />
                 </div>
-            </nav>
+            </Container>
         </>
     )
 }

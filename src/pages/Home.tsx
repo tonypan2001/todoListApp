@@ -3,12 +3,13 @@ import { FaSearch } from "react-icons/fa";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import TaskCard from "../components/TaskCard";
+import Container from "../components/Container";
 
 export default function Home() {
     const [isDone, setIsDone] = useState(false);
     return (
         <>
-            <div className="flex flex-col justify-between items-start p-4 mt-4 gap-4 shadow-md rounded-xl">
+            <Container className="flex-col items-start mt-4 gap-3">
                 <div className="flex justify-between w-full gap-4">
                     <div className="flex items-end justify-between w-full">
                         <div className="flex flex-col justify-between items-start w-full">
@@ -64,7 +65,7 @@ export default function Home() {
                         onDelete={() => console.log("Delete task")}
                     />
                 </div>
-            </div>
+            </Container>
         </>
     )
 }
