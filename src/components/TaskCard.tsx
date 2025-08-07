@@ -45,7 +45,7 @@ export default function TaskCard(props: TaskCardProps) {
             <div className="relative ml-4" ref={dropdownRef}>
                 <button
                     onClick={() => setDropdownOpen(!isDropdownOpen)}
-                    className="p-2 text-gray-500 hover:text-gray-700"
+                    className="p-2 text-gray-500 hover:text-gray-700 cursor-pointer"
                     aria-label="Task Menu"
                 >
                     <FaEllipsisV />
@@ -58,7 +58,7 @@ export default function TaskCard(props: TaskCardProps) {
                                 props.onToggleDone?.();
                                 setDropdownOpen(false);
                             }}
-                            className="block w-full px-4 py-2 text-left text-md hover:bg-gray-100 text-green-500"
+                            className="block w-full px-4 py-2 text-left text-md hover:bg-gray-100 text-green-500 cursor-pointer"
                         >
                             {!props.isDone ? <FaCheckCircle /> : <FaRegCircle />}
                             {props.isDone ? "Mark as Undone" : "Mark as Done"}
@@ -68,7 +68,7 @@ export default function TaskCard(props: TaskCardProps) {
                                 props.onEdit?.();
                                 setDropdownOpen(false);
                             }}
-                            className="block w-full px-4 py-2 text-left text-md hover:bg-gray-100 text-blue-500"
+                            className="block w-full px-4 py-2 text-left text-md hover:bg-gray-100 text-blue-500 cursor-pointer"
                         >
                             <FaEdit/>
                             Edit
@@ -78,7 +78,7 @@ export default function TaskCard(props: TaskCardProps) {
                                 props.onDelete?.();
                                 setDropdownOpen(false);
                             }}
-                            className="block w-full px-4 py-2 text-left text-md text-red-600 hover:bg-gray-100"
+                            className="block w-full px-4 py-2 text-left text-md text-red-600 hover:bg-gray-100 cursor-pointer"
                         >
                             <FaTrash/>
                             Delete
