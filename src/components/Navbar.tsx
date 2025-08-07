@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaCirclePlus } from "react-icons/fa6";
-import { FaCalendarCheck } from "react-icons/fa";
+import { FaCalendarCheck, FaUserCircle } from "react-icons/fa";
 import Button from "./Button";
 import Header from "./Header";
 import Modal from "./Modal";
@@ -43,7 +43,7 @@ export default function Navbar() {
                 </div>
             </Modal>}
 
-            <nav className="flex justify-between items-center p-4 shadow-md">
+            <nav className="flex justify-between items-center p-4 shadow-md rounded-xl">
                 <div className="flex flex-col items-start">
                     <Header className="flex flex-row justify-between items-center gap-2">
                         <FaCalendarCheck className="text-green-600" />
@@ -51,8 +51,10 @@ export default function Navbar() {
                     </Header>
                     <p className="text-sm font-light italic">Don't forget to do your tasks.</p>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center gap-4">
                     <Button icon={<FaCirclePlus />} label="Create" type="button" onClick={() => setIsModalOpen(true)} />
+                    <div className="w-px h-6 bg-gray-300" />
+                    <Button icon={<FaUserCircle />} type="button" label="Account" className="bg-gray-500 rounded-full" />
                 </div>
             </nav>
         </>

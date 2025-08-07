@@ -5,7 +5,7 @@ import Input from "../components/Input";
 export default function Home() {
     return (
         <>
-            <div className="flex justify-between items-center p-4 mt-4 gap-4 shadow-md">
+            <div className="flex justify-between items-center p-4 mt-4 gap-4 shadow-md rounded-xl">
                 <div className="flex items-end w-full">
                     <div className="flex flex-col justify-between items-start w-full">
                         <h1>Search your tasks</h1>

@@ -3,6 +3,10 @@
 
 :root {
   --font-sans: 'Noto Sans', sans-serif;
+
+  --primary: #ff7d34;
+  --primary-background: #262c47;
+  --secondary: #ffc634;
 }
 
 body {

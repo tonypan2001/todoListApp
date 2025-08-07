@@ -11,7 +11,7 @@ export default function Input(props: InputProps) {
             {!props.useTextArea && (
                 <input
                     className={`${props.className} 
-                    w-full px-4 py-2 text-sm border outline-none transition
+                    w-full px-4 py-2 text-sm border rounded-xl outline-none transition
                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                     ${props.error ? 'border-red-500' : 'border-gray-300'}`}
                     placeholder={props.placeholder}
@@ -19,7 +19,7 @@ export default function Input(props: InputProps) {
             )}
             {props.useTextArea && (
                 <textarea 
-                    className={`w-full px-4 py-2 text-sm border outline-none transition
+                    className={`w-full px-4 py-2 text-sm border rounded-xl outline-none transition
                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
                     ${props.error ? 'border-red-500' : 'border-gray-300'}`}
                     placeholder={props.placeholder}
