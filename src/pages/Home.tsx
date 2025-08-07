@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import TaskCard from "../components/TaskCard";
 
 export default function Home() {
+    const [isDone, setIsDone] = useState(false);
     return (
         <>
             <div className="flex flex-col justify-between items-start p-4 mt-4 gap-4 shadow-md rounded-xl">
@@ -33,17 +36,33 @@ export default function Home() {
 
                 <div className="flex items-start">
                     <div className="flex gap-2">
-                        <Button label="Coding"/>
-                        <Button label="Workout"/>
-                        <Button label="Dinner"/>
+                        <Button label="Coding" />
+                        <Button label="Workout" />
+                        <Button label="Dinner" />
                     </div>
                 </div>
 
                 {/*Tasks*/}
-                <div>
-                    <div>
-                        
-                    </div>
+                <div className="flex flex-col w-full min-h-120 py-4 gap-3">
+                    {/* <h1 className="text-gray-400">You don't have any tasks yet</h1> */}
+                    <TaskCard
+                        title="Finish Landing Page"
+                        description="Complete the header and responsive layout"
+                        icon="🚀"
+                        isDone={isDone}
+                        onToggleDone={() => setIsDone(prev => !prev)}
+                        onEdit={() => console.log("Edit task")}
+                        onDelete={() => console.log("Delete task")}
+                    />
+                    <TaskCard
+                        title="Finish Landing Page"
+                        description="Complete the header and responsive layout"
+                        icon="🚀"
+                        isDone={isDone}
+                        onToggleDone={() => setIsDone(prev => !prev)}
+                        onEdit={() => console.log("Edit task")}
+                        onDelete={() => console.log("Delete task")}
+                    />
                 </div>
             </div>
         </>
