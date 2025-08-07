@@ -5,27 +5,46 @@ import Input from "../components/Input";
 export default function Home() {
     return (
         <>
-            <div className="flex justify-between items-center p-4 mt-4 gap-4 shadow-md rounded-xl">
-                <div className="flex items-end w-full">
-                    <div className="flex flex-col justify-between items-start w-full">
-                        <h1>Search your tasks</h1>
-                        <Input className="mt-2" placeholder="Type something..."/>
+            <div className="flex flex-col justify-between items-start p-4 mt-4 gap-4 shadow-md rounded-xl">
+                <div className="flex justify-between w-full gap-4">
+                    <div className="flex items-end justify-between w-full">
+                        <div className="flex flex-col justify-between items-start w-full">
+                            <h1>Search your tasks</h1>
+                            <Input className="mt-2" placeholder="Type something..." />
+                        </div>
+                        <div className="pl-2">
+                            <Button icon={<FaSearch />} label="Search" />
+                        </div>
                     </div>
-                    <div className="pl-2">
-                        <Button icon={<FaSearch />} label="Search" />
+
+                    <div className="w-px h-14 bg-gray-300" />
+
+                    <div className="flex justify-start items-center w-full">
+                        <div className="w-[60px] h-[60px] flex items-center justify-center border-2 rounded-4xl shadow-lg">
+                            <h1 className="font-bold">100%</h1>
+                        </div>
+                        <div className="flex flex-col items-start ms-3">
+                            <p className="font-bold text-xl">Your have 1 task(s) to complete</p>
+                            <p className="text-sm">No tasks completed yet. Keep going!</p>
+                        </div>
+                    </div>
+                    <div></div>
+                </div>
+
+                <div className="flex items-start">
+                    <div className="flex gap-2">
+                        <Button label="Coding"/>
+                        <Button label="Workout"/>
+                        <Button label="Dinner"/>
                     </div>
                 </div>
-                <div className="w-px h-14 bg-gray-300" />
-                <div className="flex justify-start items-center w-full">
-                    <div className="w-[60px] h-[60px] flex items-center justify-center border-2 rounded-4xl shadow-lg">
-                        <h1 className="font-bold">100%</h1>
-                    </div>
-                    <div className="flex flex-col items-start ms-3">
-                        <p className="font-bold text-xl">Your have 1 task(s) to complete</p>
-                        <p className="text-sm">No tasks completed yet. Keep going!</p>
+
+                {/*Tasks*/}
+                <div>
+                    <div>
+                        
                     </div>
                 </div>
-                <div></div>
             </div>
         </>
     )
