@@ -5,8 +5,13 @@
   --font-sans: 'Noto Sans', sans-serif;
 
   --primary: #ff7d34;
-  --primary-background: #262c47;
+  --primary-hover: #fc6d1a;
+
+  --primary-dark: #262c47;
+  --primary-dark-hover: #1c2034;
+
   --secondary: #ffc634;
+  --secondary-hover: #ffc634;
 }
 
 body {

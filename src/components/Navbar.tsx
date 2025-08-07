@@ -46,7 +46,7 @@ export default function Navbar() {
             <nav className="flex justify-between items-center p-4 shadow-md rounded-xl">
                 <div className="flex flex-col items-start">
                     <Header className="flex flex-row justify-between items-center gap-2">
-                        <FaCalendarCheck className="text-green-600" />
+                        <FaCalendarCheck className="text-[var(--primary)]" />
                         TodoList
                     </Header>
                     <p className="text-sm font-light italic">Don't forget to do your tasks.</p>
@@ -54,7 +54,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-4">
                     <Button icon={<FaCirclePlus />} label="Create" type="button" onClick={() => setIsModalOpen(true)} />
                     <div className="w-px h-6 bg-gray-300" />
-                    <Button icon={<FaUserCircle />} type="button" label="Account" className="bg-gray-500 rounded-full" />
+                    <Button icon={<FaUserCircle />} label="Account" type="button" className="bg-[var(--primary-dark)] rounded-full" />
                 </div>
             </nav>
         </>
