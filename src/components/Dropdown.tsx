@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
+import { FiChevronDown } from "react-icons/fi";
 import type { DropdownProps } from "../types/dropdown.types";
-import Button from "./Button";
 
 export default function Dropdown(props: DropdownProps) {
     const [isOpen, setIsOpen] = useState(false);
@@ -25,22 +25,29 @@ export default function Dropdown(props: DropdownProps) {
     };
 
     return (
-        <div className="relative inline-block text-left w-full" ref={dropdownRef}>
-            <Button
+        <div className="relative w-full" ref={dropdownRef}>
+            {/* ปุ่มหลัก */}
+            <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50"
-                label={selected || props.label}
-            />
+                className="w-full flex items-center justify-between px-4 py-2 border border-gray-300 rounded-lg bg-white text-sm text-gray-700 shadow-sm hover:bg-gray-50 transition cursor-pointer"
+            >
+                <span>{selected || props.label}</span>
+                <FiChevronDown
+                    className={`ml-2 text-gray-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+                        }`}
+                />
+            </button>
 
+            {/* เมนู Dropdown */}
             {isOpen && (
-                <div className="absolute z-10 mt-1 w-full bg-white border border-gray-200 shadow-lg">
+                <div className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
                     <ul className="py-1 text-sm text-gray-700">
                         {props.items.map((item, index) => (
                             <li
                                 key={index}
                                 onClick={() => handleSelect(item)}
-                                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                className="text-start px-4 py-2 hover:bg-gray-100 cursor-pointer transition"
                             >
                                 {item}
                             </li>

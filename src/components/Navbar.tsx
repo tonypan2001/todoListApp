@@ -9,9 +9,12 @@ import Input from "./Input";
 import Dropdown from "./Dropdown";
 import Container from "./Container";
 import ThemeToggle from "./ThemeToggle";
+import Sidebar from "./Sidebar";
+import { FiSettings } from "react-icons/fi";
 
 export default function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleSelect = (item: string) => {
     console.log("You selected:", item);
@@ -67,16 +70,22 @@ export default function Navbar() {
             type="button"
             onClick={() => setIsModalOpen(true)}
           />
-          {/* <div className="w-px h-6 bg-[var(--primary-text-color)]" /> */}
-          {/* <Button
-            icon={<FaUserCircle />}
-            label="Account"
-            type="button"
-          /> */}
           <div className="w-px h-6 bg-[var(--primary-text-color)]" />
-          <ThemeToggle />
+          <Button
+            icon={<FiSettings />}
+            label="Settings"
+            type="button"
+            onClick={() => setIsSidebarOpen(true)}
+            className="!bg-[var(--secondary-background)]"
+          />
         </div>
       </Container>
+
+      {/* Sidebar */}
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)}>
+        {/* ปุ่มหรือเมนูใน sidebar */}
+          <ThemeToggle />
+      </Sidebar>
     </>
   );
 }
