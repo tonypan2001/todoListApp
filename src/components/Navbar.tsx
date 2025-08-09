@@ -53,7 +53,7 @@ export default function Navbar() {
       <Container>
         <div className="flex flex-col items-start">
           <Header className="flex flex-row justify-between items-center gap-2">
-            <FaCalendarCheck className="text-[var(--primary)]" />
+            <FaCalendarCheck className="text-[var(--primary-color)]" />
             TodoList
           </Header>
           <p className="text-sm font-light italic">
@@ -67,14 +67,13 @@ export default function Navbar() {
             type="button"
             onClick={() => setIsModalOpen(true)}
           />
-          <div className="w-px h-6 bg-gray-300" />
-          <Button
+          {/* <div className="w-px h-6 bg-[var(--primary-text-color)]" /> */}
+          {/* <Button
             icon={<FaUserCircle />}
             label="Account"
             type="button"
-            className="bg-[var(--primary-dark)] rounded-full"
-          />
-          <div className="w-px h-6 bg-gray-300" />
+          /> */}
+          <div className="w-px h-6 bg-[var(--primary-text-color)]" />
           <ThemeToggle />
         </div>
       </Container>

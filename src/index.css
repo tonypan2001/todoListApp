@@ -4,20 +4,67 @@
 :root {
   --font-sans: 'Noto Sans', sans-serif;
 
-  --primary: #ff7d34;
-  --primary-hover: #fc6d1a;
+  --primary-color: #ff7d34;
+  --primary-color-hover: #fc6d1a;
 
-  --primary-dark: #262c47;
-  --primary-dark-hover: #1c2034;
+  --secondary-color: #ffc634;
+  --secondary-color-hover: #ffc634;
 
-  --secondary: #ffc634;
-  --secondary-hover: #ffc634;
+  --primary-background: #ffffff;
+  --secondary-background: #f8f9fa;
+
+  --primary-text-color: #000000;
+  --secondary-text-color: #6c757d;
+
+  --primary-border-color: #ced4da;
+  --secondary-border-color: #dee2e6;
+}
+
+/* Dark theme overrides */
+html.theme-dark {
+  --primary-color: #ff7d34;
+  --primary-color-hover: #fc6d1a;
+
+  --secondary-color: #ffc634;
+  --secondary-color-hover: #ffc634;
+
+  --primary-background: #262c47;
+  --secondary-background: #1c2034;
+
+  --primary-text-color: #ffffff;
+  --secondary-text-color: #cccccc;
+
+  --primary-border-color: #151827;
+  --secondary-border-color: #141726;
+}
+
+/* Light theme */
+html.theme-light input::placeholder {
+  color: var(--secondary-text-color);
+}
+
+/* Dark theme */
+html.theme-dark input::placeholder {
+  color: var(--secondary-text-color);
 }
 
 body {
   font-family: var(--font-sans);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  background-color: var(--primary-background);
+  color: var(--primary-text-color);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
+  /* border: 1px solid var(--primary-border-color); */
+}
+
+.button:hover {
+  background-color: var(--primary-color-hover);
 }
 
 *, *::before, *::after {

@@ -17,8 +17,8 @@ export default function TaskCard(props: TaskCardProps) {
     }, []);
 
     return (
-        <div className={`flex items-start justify-between p-4 border rounded-lg shadow-sm transition 
-            ${props.isDone ? "bg-gray-100 border-gray-300" : "bg-white border-gray-200 hover:shadow-md"}`}>
+        <div className={`flex items-start justify-between p-4 border-2 rounded-lg shadow-sm transition 
+            ${props.isDone ? "bg-[var(--secondary-background)] border-[var(--secondary-border-color)]" : "bg-[var(--primary-background)] border-[var(--primary-border-color)] hover:shadow-md"}`}>
 
             {/* Left Section */}
             <div className="flex items-start gap-3 flex-1">
@@ -30,11 +30,11 @@ export default function TaskCard(props: TaskCardProps) {
                     <div className="text-2xl">{props.icon}</div>
                     <div className="text-start">
                         <h3 className={`text-lg font-semibold 
-                            ${props.isDone ? "text-gray-500 line-through" : "text-gray-800"}`}>
+                            ${props.isDone ? "text-[var(--secondary-text-color)] line-through" : "text-[var(--primary-text-color)]"}`}>
                             {props.title}
                         </h3>
                         <p className={`text-sm 
-                            ${props.isDone ? "text-gray-400 line-through" : "text-gray-600"}`}>
+                            ${props.isDone ? "text-[var(--secondary-text-color)] line-through" : "text-[var(--primary-text-color)]"}`}>
                             {props.description}
                         </p>
                     </div>
