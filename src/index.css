@@ -28,8 +28,10 @@ html.theme-dark {
   --secondary-color: #ffc634;
   --secondary-color-hover: #ffc634;
 
-  --primary-background: #262c47;
-  --secondary-background: #1c2034;
+  --primary-background: #1c2034;
+  /* --primary-background: #262c47; */
+  /* --secondary-background: #1c2034; */
+  --secondary-background: #262c47;
 
   --primary-text-color: #ffffff;
   --secondary-text-color: #cccccc;
