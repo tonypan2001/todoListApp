@@ -12,7 +12,7 @@ export default function Input(props: InputProps) {
                 <input
                     className={`${props.className} 
                     w-full px-4 py-2 text-sm border-2 rounded-xl outline-none transition
-                    focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]
+                    focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] bg-[var(--primary-input-background-color)]
                     ${props.error ? 'border-red-500' : 'border-gray-300'}`}
                     placeholder={props.placeholder}
                 />
@@ -20,7 +20,7 @@ export default function Input(props: InputProps) {
             {props.useTextArea && (
                 <textarea 
                     className={`w-full px-4 py-2 text-sm border-2 rounded-xl outline-none transition
-                    focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]
+                    focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] bg-[var(--primary-input-background-color)]
                     ${props.error ? 'border-red-500' : 'border-gray-300'}`}
                     placeholder={props.placeholder}
                     rows={4}

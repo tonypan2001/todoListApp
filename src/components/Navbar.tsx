@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoIosCreate } from "react-icons/io";
 import { FaCirclePlus } from "react-icons/fa6";
-import { FaCalendarCheck, FaUserCircle } from "react-icons/fa";
+import { FaCalendarCheck } from "react-icons/fa";
 import Button from "./Button";
 import Header from "./Header";
 import Modal from "./Modal";

@@ -18,6 +18,8 @@
 
   --primary-border-color: #ced4da;
   --secondary-border-color: #dee2e6;
+
+  --primary-input-background-color: #ffffff;
 }
 
 /* Dark theme overrides */
@@ -29,8 +31,6 @@ html.theme-dark {
   --secondary-color-hover: #ffc634;
 
   --primary-background: #1c2034;
-  /* --primary-background: #262c47; */
-  /* --secondary-background: #1c2034; */
   --secondary-background: #262c47;
 
   --primary-text-color: #ffffff;
@@ -38,6 +38,8 @@ html.theme-dark {
 
   --primary-border-color: #151827;
   --secondary-border-color: #141726;
+
+  --primary-input-background-color: #1f2339;
 }
 
 /* Light theme */

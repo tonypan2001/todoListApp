@@ -12,7 +12,7 @@ export default function Sidebar(props: SidebarProps) {
         };
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [props.onClose]);
+    }, [props, props.onClose]);
 
     return (
         <>
@@ -35,7 +35,7 @@ export default function Sidebar(props: SidebarProps) {
                         <FaCalendarCheck className="text-[var(--primary-color)]" />
                         TodoList
                     </Header>
-                    <button onClick={props.onClose}>
+                    <button onClick={props.onClose} className="cursor-pointer">
                         <IoClose size={24} />
                     </button>
                 </div>
