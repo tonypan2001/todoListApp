@@ -11,10 +11,12 @@ import Container from "./Container";
 import ThemeToggle from "./ThemeToggle";
 import Sidebar from "./Sidebar";
 import { FiSettings } from "react-icons/fi";
+import DatePicker from "./DatePicker";
 
 export default function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [deadline, setDeadline] = useState("");
 
   const handleSelect = (item: string) => {
     console.log("You selected:", item);
@@ -41,13 +43,21 @@ export default function Navbar() {
                 onSelect={handleSelect}
               />
             </div>
+            <div className="flex flex-col gap-2 items-start">
+              <label>Deadline</label>
+              <DatePicker
+                value={deadline}
+                onChange={(date: string) => setDeadline(date)}
+                allowPast={false} // ไม่ให้เลือกวันในอดีต
+              />
+            </div>
           </form>
           <div className="flex items-center mt-4">
             <Button
               type="submit"
               icon={<IoIosCreate />}
               label="Create Task"
-              className="w-full rounded-4xl text-xl"
+              className="w-full text-2xl"
             />
           </div>
         </Modal>

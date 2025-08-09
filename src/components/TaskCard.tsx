@@ -37,6 +37,10 @@ export default function TaskCard(props: TaskCardProps) {
                             ${props.isDone ? "text-[var(--secondary-text-color)] line-through" : "text-[var(--primary-text-color)]"}`}>
                             {props.description}
                         </p>
+                        <span className={`text-xs
+                            ${props.isDone ? "text-[var(--secondary-text-color)] line-through" : "text-[var(--primary-text-color)]"}`}>
+                            Deadline: {props.date}
+                        </span>
                     </div>
                 </div>
             </div>

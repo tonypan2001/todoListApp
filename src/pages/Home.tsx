@@ -49,6 +49,7 @@ export default function Home() {
                     <TaskCard
                         title="Finish Landing Page"
                         description="Complete the header and responsive layout"
+                        date="10/10/2025"
                         icon="🚀"
                         isDone={isDone}
                         onToggleDone={() => setIsDone(prev => !prev)}
@@ -58,6 +59,7 @@ export default function Home() {
                     <TaskCard
                         title="Finish Landing Page"
                         description="Complete the header and responsive layout"
+                        date="10/10/2025"
                         icon="🚀"
                         isDone={isDone}
                         onToggleDone={() => setIsDone(prev => !prev)}
