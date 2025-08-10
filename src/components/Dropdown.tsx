@@ -30,7 +30,7 @@ export default function Dropdown(props: DropdownProps) {
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between px-4 py-2 border border-gray-300 rounded-lg bg-white text-sm text-gray-700 shadow-sm hover:bg-gray-50 transition cursor-pointer"
+                className="w-full flex items-center justify-between px-4 py-2 border-2 border-gray-300 rounded-lg bg-[var(--primary-input-background-color)] text-sm text-[var(--primary-text-color)] shadow-sm hover:bg-gray-50 transition cursor-pointer"
             >
                 <span>{selected || props.label}</span>
                 <FiChevronDown
@@ -41,8 +41,8 @@ export default function Dropdown(props: DropdownProps) {
 
             {/* เมนู Dropdown */}
             {isOpen && (
-                <div className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
-                    <ul className="py-1 text-sm text-gray-700">
+                <div className="absolute z-10 mt-1 w-full bg-[var(--primary-input-background-color)] border-2 border-gray-200 rounded-lg shadow-lg overflow-hidden">
+                    <ul className="py-1 text-sm text-[var(--primary-text-color)]">
                         {props.items.map((item, index) => (
                             <li
                                 key={index}
