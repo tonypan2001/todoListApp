@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import type { DatePickerProps } from "../types/datepicker.types";
+import type { DatePickerProps } from "../types/components/datepicker.types";
 
 export default function DatePicker(props: DatePickerProps) {
   const [selectedDate, setSelectedDate] = useState(props.value || "");
