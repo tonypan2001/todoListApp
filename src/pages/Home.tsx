@@ -10,7 +10,7 @@ export default function Home() {
     return (
         <>
             <Container className="flex-col items-start mt-4 gap-3">
-                <div className="flex justify-between w-full gap-4">
+                <div className="flex flex-col justify-between w-full gap-4">
                     <div className="flex items-end justify-between w-full">
                         <div className="flex flex-col justify-between items-start w-full">
                             <h1>Search your tasks</h1>
@@ -21,7 +21,7 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="w-px h-14 bg-gray-300" />
+                    {/* <div className="w-px h-14 bg-gray-300" /> */}
 
                     <div className="flex justify-start items-center w-full">
                         <div className="w-[60px] h-[60px] flex items-center justify-center border-2 rounded-4xl shadow-lg">
