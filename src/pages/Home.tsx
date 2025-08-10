@@ -9,7 +9,7 @@ export default function Home() {
     const [isDone, setIsDone] = useState(false);
     return (
         <>
-            <Container className="flex-col items-start mt-4 gap-3">
+            <Container className="relative flex-col items-start mt-4 gap-3">
                 <div className="flex flex-col justify-between w-full gap-4">
                     <div className="flex items-end justify-between w-full">
                         <div className="flex flex-col justify-between items-start w-full">
@@ -27,9 +27,9 @@ export default function Home() {
                         <div className="w-[60px] h-[60px] flex items-center justify-center border-2 border-[var(--primary-success-color)] rounded-4xl shadow-lg">
                             <h1 className="font-bold text-[var(--primary-success-color)]">100%</h1>
                         </div>
-                        <div className="flex flex-col items-start ms-3">
-                            <p className="font-bold text-xl">Your have 1 task(s) to complete</p>
-                            <p className="text-sm">No tasks completed yet. Keep going!</p>
+                        <div className="flex flex-col ms-3">
+                            <p className="font-bold text-start text-sm md:text-xl">Your have 1 task(s) to complete</p>
+                            <p className="text-sm text-start">No tasks completed yet. Keep going!</p>
                         </div>
                     </div>
                     <div></div>
@@ -66,7 +66,44 @@ export default function Home() {
                         onEdit={() => console.log("Edit task")}
                         onDelete={() => console.log("Delete task")}
                     />
+                    <TaskCard
+                        title="Finish Landing Page"
+                        description="Complete the header and responsive layout"
+                        date="10/10/2025"
+                        icon="🚀"
+                        isDone={isDone}
+                        onToggleDone={() => setIsDone(prev => !prev)}
+                        onEdit={() => console.log("Edit task")}
+                        onDelete={() => console.log("Delete task")}
+                    />
+                    <TaskCard
+                        title="Finish Landing Page"
+                        description="Complete the header and responsive layout"
+                        date="10/10/2025"
+                        icon="🚀"
+                        isDone={isDone}
+                        onToggleDone={() => setIsDone(prev => !prev)}
+                        onEdit={() => console.log("Edit task")}
+                        onDelete={() => console.log("Delete task")}
+                    />
+                    <TaskCard
+                        title="Finish Landing Page"
+                        description="Complete the header and responsive layout"
+                        date="10/10/2025"
+                        icon="🚀"
+                        isDone={isDone}
+                        onToggleDone={() => setIsDone(prev => !prev)}
+                        onEdit={() => console.log("Edit task")}
+                        onDelete={() => console.log("Delete task")}
+                    />
                 </div>
+                {/* <div className="fixed right-6 bottom-6 shadow-xl rounded-full flex md:hidden">
+                    <Button 
+                        label="Create Task"
+                        icon={<FaPlus />}
+                        className="rounded-full !p-4" 
+                    />
+                </div> */}
             </Container>
         </>
     )

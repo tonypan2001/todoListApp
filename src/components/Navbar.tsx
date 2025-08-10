@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { IoIosCreate } from "react-icons/io";
 import { FaCirclePlus } from "react-icons/fa6";
-import { FaCalendarCheck } from "react-icons/fa";
+import { FaCalendarCheck, FaPlus } from "react-icons/fa";
+import { FiMenu } from "react-icons/fi";
 import Button from "./Button";
 import Header from "./Header";
 import Modal from "./Modal";
@@ -10,7 +11,6 @@ import Dropdown from "./Dropdown";
 import Container from "./Container";
 import ThemeToggle from "./ThemeToggle";
 import Sidebar from "./Sidebar";
-import { FiSettings } from "react-icons/fi";
 import DatePicker from "./DatePicker";
 
 export default function Navbar() {
@@ -69,27 +69,39 @@ export default function Navbar() {
             <FaCalendarCheck className="text-[var(--primary-color)]" />
             TodoList
           </Header>
-          <p className="text-sm font-light italic">
+          <p className="text-xs md:text-sm font-light italic">
             Don't forget to do your tasks.
           </p>
         </div>
         <div className="flex items-center gap-4">
           <Button
             icon={<FaCirclePlus />}
-            label="Create"
+            label="Create Task"
             type="button"
             onClick={() => setIsModalOpen(true)}
+            className="hidden md:flex"
           />
-          <div className="w-px h-6 bg-[var(--primary-text-color)]" />
+          <div className="w-px h-6 bg-[var(--primary-text-color)] hidden md:flex" />
           <Button
-            icon={<FiSettings />}
-            label="Settings"
+            icon={<FiMenu />}
+            // label="Settings"
             type="button"
             onClick={() => setIsSidebarOpen(true)}
-            className="!bg-[var(--secondary-background)]"
+            className="py-3"
           />
         </div>
       </Container>
+
+      {!isModalOpen && (
+        <div className="fixed right-6 bottom-6 shadow-xl rounded-full flex md:hidden z-50">
+            <Button 
+                // label="Create Task"
+                onClick={() => setIsModalOpen(true)}
+                icon={<FaPlus />}
+                className="!rounded-full !p-6 text-2xl" 
+            />
+        </div>
+      )}
 
       {/* Sidebar */}
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)}>

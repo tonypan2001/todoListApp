@@ -25,7 +25,7 @@ export default function Sidebar(props: SidebarProps) {
 
             {/* Sidebar */}
             <div
-                className={`fixed top-0 right-0 h-full w-100 bg-[var(--primary-background)] text-[var(--primary-text-color)] shadow-lg z-50 transform transition-transform duration-300 ${props.isOpen ? "translate-x-0" : "translate-x-full"
+                className={`fixed top-0 right-0 h-full w-80 bg-[var(--primary-background)] text-[var(--primary-text-color)] shadow-lg z-50 transform transition-transform duration-300 ${props.isOpen ? "translate-x-0" : "translate-x-full"
                     }`}
             >
                 {/* Header */}
