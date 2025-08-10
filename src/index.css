@@ -20,6 +20,10 @@
   --secondary-border-color: #dee2e6;
 
   --primary-input-background-color: #ffffff;
+
+  --primary-success-color: #00c868;
+  --primary-blue-color: #1278ff;
+  --primary-error-color: #e12424;
 }
 
 /* Dark theme overrides */

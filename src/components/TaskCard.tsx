@@ -22,7 +22,7 @@ export default function TaskCard(props: TaskCardProps) {
 
             {/* Left Section */}
             <div className="flex items-start gap-3 flex-1">
-                <div className="text-green-500 mt-1">
+                <div className="text-[var(--primary-success-color)] mt-1">
                     {props.isDone ? <FaCheckCircle /> : <FaRegCircle />}
                 </div>
 
@@ -62,7 +62,7 @@ export default function TaskCard(props: TaskCardProps) {
                                 props.onToggleDone?.();
                                 setDropdownOpen(false);
                             }}
-                            className="block w-full px-4 py-2 text-left text-md hover:bg-gray-100 text-green-500 cursor-pointer"
+                            className="block w-full px-4 py-2 text-left text-md hover:bg-gray-100 rounded-lg text-[var(--primary-success-color)] cursor-pointer"
                         >
                             {!props.isDone ? <FaCheckCircle /> : <FaRegCircle />}
                             {props.isDone ? "Mark as Undone" : "Mark as Done"}
@@ -72,7 +72,7 @@ export default function TaskCard(props: TaskCardProps) {
                                 props.onEdit?.();
                                 setDropdownOpen(false);
                             }}
-                            className="block w-full px-4 py-2 text-left text-md hover:bg-gray-100 text-blue-500 cursor-pointer"
+                            className="block w-full px-4 py-2 text-left text-md hover:bg-gray-100 rounded-lg text-[var(--primary-blue-color)] cursor-pointer"
                         >
                             <FaEdit/>
                             Edit
@@ -82,7 +82,7 @@ export default function TaskCard(props: TaskCardProps) {
                                 props.onDelete?.();
                                 setDropdownOpen(false);
                             }}
-                            className="block w-full px-4 py-2 text-left text-md text-red-600 hover:bg-gray-100 cursor-pointer"
+                            className="block w-full px-4 py-2 text-left text-md rounded-lg text-[var(--primary-error-color)] hover:bg-gray-100 cursor-pointer"
                         >
                             <FaTrash/>
                             Delete
