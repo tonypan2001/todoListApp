@@ -23,7 +23,7 @@ export default function Home() {
 
                     {/* <div className="w-px h-14 bg-gray-300" /> */}
 
-                    <div className="flex justify-start items-center w-full">
+                    <div className="flex justify-start items-center w-full mt-2">
                         <div className="w-[60px] h-[60px] flex items-center justify-center border-2 border-[var(--primary-success-color)] rounded-4xl shadow-lg">
                             <h1 className="font-bold text-[var(--primary-success-color)]">100%</h1>
                         </div>
