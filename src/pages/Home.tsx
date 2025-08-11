@@ -25,6 +25,8 @@ export default function Home() {
 
   const { tasks, loading, error, addTask, patchTask, removeTask } = useTasks();
 
+  const [errors, setErrors] = useState<{ title?: string; deadline?: string }>({});
+
   // เมื่อเปิดแก้ไข ให้ prefill ฟอร์ม
   useEffect(() => {
     if (editingTask) {
@@ -73,13 +75,25 @@ export default function Home() {
   const closeModal = () => {
     setIsModalOpen(false);
     setEditingTask(null);
+    setErrors({});
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title.trim()) return alert("Please enter title");
-    if (!deadline) return alert("Please select deadline");
+    const newErrors: { title?: string; deadline?: string } = {};
+
+    if (!title.trim()) {
+    newErrors.title = "Please enter a title";
+    }
+    if (!deadline) {
+        newErrors.deadline = "Please select a deadline";
+    }
+
+    setErrors(newErrors);
+
+    // ถ้ามี error จะไม่ทำต่อ
+    if (Object.keys(newErrors).length > 0) return;
 
     try {
       if (editingTask) {
@@ -125,6 +139,7 @@ export default function Home() {
                 defaultValue={editingTask?.title || ""}
                 onChange={(e) => setTitle(e.target.value)}
               />
+              {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
             </div>
             <div className="flex flex-col gap-2 items-start">
               <label>Task description</label>
@@ -150,6 +165,7 @@ export default function Home() {
                 onChange={(date: string) => setDeadline(date)}
                 allowPast={false} // ไม่ให้เลือกวันในอดีต
               />
+              {errors.deadline && <p className="text-red-500 text-sm">{errors.deadline}</p>}
             </div>
             <div className="flex items-center mt-4">
                 <Button
