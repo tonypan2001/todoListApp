@@ -1,4 +1,3 @@
-// src/mocks/handlers.ts
 import { http } from "msw";
 import { ensureSeed, loadTasks, saveTasks } from "./storage";
 import type { Task } from "../types/api/task.types";
