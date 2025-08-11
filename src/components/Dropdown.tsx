@@ -35,14 +35,16 @@ export default function Dropdown(props: DropdownProps) {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between px-4 py-2 border-2 border-[var(--primary-border-color)] rounded-lg bg-[var(--primary-input-background-color)] text-sm text-[var(--primary-text-color)] hover:bg-[var(--secondary-background-color)] transition cursor-pointer"
       >
-        <div className="flex gap-1 items-center">
-            <div
-            className="w-[12px] h-[12px] rounded-full"
-            style={{ backgroundColor: selected ?? undefined }}
-            >
-            </div>
-            <span>{selected || props.label}</span>
-        </div>
+        {selected && (
+          <div className="flex gap-1 items-center">
+              <div
+              className="w-[12px] h-[12px] rounded-full"
+              style={{ backgroundColor: selected ?? undefined }}
+              >
+              </div>
+          </div>
+        )}
+        <span>{selected || props.label}</span>
         <FiChevronDown
           className={`ml-2 text-gray-500 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""

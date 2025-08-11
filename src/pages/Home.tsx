@@ -17,15 +17,20 @@ export default function Home() {
   const [editingTask, setEditingTask] = useState<Task | null>(null); // เก็บ task ที่จะ edit
   const [search, setSearch] = useState("");
 
+  const root = getComputedStyle(document.documentElement);
+  const defaultColor = root.getPropertyValue("--primary-color").trim();
+
   // ฟอร์ม state
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [color, setColor] = useState("#ff7d34"); // ค่าเริ่มต้น
+  const [color, setColor] = useState(defaultColor); // ค่าเริ่มต้น
   const [deadline, setDeadline] = useState("");
 
   const { tasks, loading, error, addTask, patchTask, removeTask } = useTasks();
 
-  const [errors, setErrors] = useState<{ title?: string; deadline?: string }>({});
+  const [errors, setErrors] = useState<{ title?: string; deadline?: string }>(
+    {}
+  );
 
   // เมื่อเปิดแก้ไข ให้ prefill ฟอร์ม
   useEffect(() => {
@@ -38,14 +43,14 @@ export default function Home() {
       // สร้าง: เคลียร์ฟอร์ม
       setTitle("");
       setDesc("");
-      setColor("#ff7d34");
+      setColor(defaultColor);
       setDeadline("");
     }
-  }, [editingTask, isModalOpen, setDeadline]);
+  }, [editingTask, isModalOpen, setDeadline, defaultColor]);
 
   const { total, completed, remaining, percent } = useMemo(() => {
     const total = tasks.length;
-    const completed = tasks.filter(t => t.done).length;
+    const completed = tasks.filter((t) => t.done).length;
     const remaining = total - completed;
     const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
     return { total, completed, remaining, percent };
@@ -55,9 +60,10 @@ export default function Home() {
   const filteredTasks = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (!q) return tasks;
-    return tasks.filter(t =>
-      t.title.toLowerCase().includes(q) ||
-      t.description.toLowerCase().includes(q)
+    return tasks.filter(
+      (t) =>
+        t.title.toLowerCase().includes(q) ||
+        t.description.toLowerCase().includes(q)
     );
   }, [search, tasks]);
 
@@ -84,10 +90,10 @@ export default function Home() {
     const newErrors: { title?: string; deadline?: string } = {};
 
     if (!title.trim()) {
-    newErrors.title = "Please enter a title";
+      newErrors.title = "Please enter a title";
     }
     if (!deadline) {
-        newErrors.deadline = "Please select a deadline";
+      newErrors.deadline = "Please select a deadline";
     }
 
     setErrors(newErrors);
@@ -139,7 +145,9 @@ export default function Home() {
                 defaultValue={editingTask?.title || ""}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
+              {errors.title && (
+                <p className="text-red-500 text-sm">{errors.title}</p>
+              )}
             </div>
             <div className="flex flex-col gap-2 items-start">
               <label>Task description</label>
@@ -153,7 +161,7 @@ export default function Home() {
             <div className="flex flex-col gap-2 items-start">
               <label>Task color</label>
               <Dropdown
-                label={editingTask?.color || "Choose a color"}
+                label={editingTask?.color || "Select a color"}
                 items={["#e64747", "#00a6ff", "#2acd01", "#ffb700"]}
                 onSelect={(val) => setColor(val)}
               />
@@ -165,15 +173,17 @@ export default function Home() {
                 onChange={(date: string) => setDeadline(date)}
                 allowPast={false} // ไม่ให้เลือกวันในอดีต
               />
-              {errors.deadline && <p className="text-red-500 text-sm">{errors.deadline}</p>}
+              {errors.deadline && (
+                <p className="text-red-500 text-sm">{errors.deadline}</p>
+              )}
             </div>
             <div className="flex items-center mt-4">
-                <Button
+              <Button
                 type="submit"
                 icon={<IoIosCreate />}
                 label={editingTask ? "Save Changes" : "Create Task"}
                 className="w-full text-2xl"
-                />
+              />
             </div>
           </form>
         </Modal>
@@ -183,15 +193,17 @@ export default function Home() {
           <div className="flex items-end justify-between w-full">
             <div className="flex flex-col justify-between items-start w-full">
               <h1>Search your tasks</h1>
-              <Input 
-              className="mt-2" 
-              placeholder="Type something..." 
-              value={search}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+              <Input
+                className="mt-2"
+                placeholder="Type something..."
+                value={search}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearch(e.target.value)
+                }
               />
             </div>
             <div className="pl-2">
-              <Button icon={<FaSearch />} label="Search" type="button"/>
+              <Button icon={<FaSearch />} label="Search" type="button" />
             </div>
           </div>
 
@@ -207,10 +219,10 @@ export default function Home() {
               </p>
               <p className="text-sm text-start">
                 {completed === 0
-                    ? "No tasks completed yet. Keep going!"
-                    : `${completed}/${total} completed`}
-                </p>
-                {/* <div className="mt-2 h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                  ? "No tasks completed yet. Keep going!"
+                  : `${completed}/${total} completed`}
+              </p>
+              {/* <div className="mt-2 h-2 w-full bg-gray-200 rounded-full overflow-hidden">
                     <div
                         className="h-full bg-[var(--primary-success-color)] transition-all duration-300"
                         style={{ width: `${percent}%` }}
@@ -241,13 +253,15 @@ export default function Home() {
 
         {/*Tasks*/}
         <div className="flex flex-col w-full min-h-120 py-4 gap-3">
-            {filteredTasks.length === 0 ? (
+          {filteredTasks.length === 0 ? (
             <p className="text-gray-400">
-              {search ? "No tasks match your search." : "You don't have any tasks yet"}
+              {search
+                ? "No tasks match your search."
+                : "You don't have any tasks yet"}
             </p>
           ) : (
             filteredTasks.map((t) => (
-                <TaskCard
+              <TaskCard
                 key={t.id}
                 title={t.title}
                 date={t.deadline}
@@ -257,10 +271,10 @@ export default function Home() {
                 isDone={t.done}
                 onToggleDone={() => patchTask(t.id, { done: !t.done })}
                 onEdit={() => {
-                    handleOpenEdit(t);
+                  handleOpenEdit(t);
                 }}
                 onDelete={() => removeTask(t.id)}
-                />
+              />
             ))
           )}
         </div>
