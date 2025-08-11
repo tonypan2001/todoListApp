@@ -1,5 +1,11 @@
 // import { useState } from "react";
-import { FaPlus, FaSearch } from "react-icons/fa";
+import {
+  FaCalendarAlt,
+  FaCheckCircle,
+  FaList,
+  FaPlus,
+  FaRegCircle,
+} from "react-icons/fa";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import TaskCard from "../components/TaskCard";
@@ -19,6 +25,11 @@ export default function Home() {
 
   const root = getComputedStyle(document.documentElement);
   const defaultColor = root.getPropertyValue("--primary-color").trim();
+  // desc = ล่าสุดก่อน, asc = เก่าสุดก่อน
+  const [dateOrder, setDateOrder] = useState<"desc" | "asc">("desc");
+  const [completionFilter, setCompletionFilter] = useState<
+    "all" | "complete" | "incomplete"
+  >("all");
 
   // ฟอร์ม state
   const [title, setTitle] = useState("");
@@ -56,16 +67,35 @@ export default function Home() {
     return { total, completed, remaining, percent };
   }, [tasks]);
 
-  // สร้างรายการที่ถูกกรองจาก search (กรองทั้ง title และ description)
-  const filteredTasks = useMemo(() => {
+  const filteredAndSortedTasks = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return tasks;
-    return tasks.filter(
-      (t) =>
-        t.title.toLowerCase().includes(q) ||
-        t.description.toLowerCase().includes(q)
-    );
-  }, [search, tasks]);
+
+    // 1) กรองจากคำค้น
+    let list = q
+      ? tasks.filter(
+          (t) =>
+            t.title.toLowerCase().includes(q) ||
+            t.description.toLowerCase().includes(q)
+        )
+      : tasks;
+
+    // 2) กรองตามสถานะ
+    if (completionFilter === "complete") {
+      list = list.filter((t) => t.done);
+    } else if (completionFilter === "incomplete") {
+      list = list.filter((t) => !t.done);
+    }
+
+    // 3) เรียงตามวันที่
+    const toTime = (d?: string) => (d ? new Date(d).getTime() : 0);
+    const sorted = [...list].sort((a, b) => {
+      const ta = toTime(a.deadline);
+      const tb = toTime(b.deadline);
+      return dateOrder === "desc" ? tb - ta : ta - tb;
+    });
+
+    return sorted;
+  }, [tasks, search, completionFilter, dateOrder]);
 
   const handleOpenCreate = () => {
     setEditingTask(null);
@@ -190,7 +220,7 @@ export default function Home() {
       )}
       <Container className="relative flex-col items-start mt-4 gap-3">
         <div className="flex flex-col justify-between w-full gap-4">
-          <div className="flex items-end justify-between w-full">
+          <div className="flex flex-col items-start justify-between w-full gap-2">
             <div className="flex flex-col justify-between items-start w-full">
               <h1>Search your tasks</h1>
               <Input
@@ -202,8 +232,60 @@ export default function Home() {
                 }
               />
             </div>
-            <div className="pl-2">
-              <Button icon={<FaSearch />} label="Search" type="button" />
+            <div className="flex items-center gap-2">
+              <Button
+                icon={<FaCalendarAlt />}
+                type="button"
+                label={
+                  dateOrder === "desc" ? "Latest → Oldest" : "Oldest → Latest"
+                }
+                onClick={() =>
+                  setDateOrder((prev) => (prev === "desc" ? "asc" : "desc"))
+                }
+                className="whitespace-nowrap"
+              />
+
+              <div className="w-[1px] h-8 bg-[var(--primary-border-color)]"></div>
+
+              <div className="flex items-center rounded-xl overflow-hidden gap-1">
+                <Button
+                  type="button"
+                  onClick={() => setCompletionFilter("all")}
+                  icon={<FaList />}
+                  label="All"
+                  className={`${
+                    completionFilter === "all"
+                      ? "bg-[var(--primary-color)] text-white"
+                      : "bg-[var(--primary-background)] text-[var(--primary-text-color)] hover:bg-gray-100"
+                  }`}
+                />
+
+                <Button
+                  type="button"
+                  onClick={() => setCompletionFilter("complete")}
+                  aria-pressed={completionFilter === "complete"}
+                  icon={<FaCheckCircle />}
+                  label="Complete"
+                  className={`${
+                    completionFilter === "complete"
+                      ? "bg-[var(--primary-color)] text-white"
+                      : "bg-[var(--primary-background)] text-[var(--primary-text-color)] hover:bg-gray-100"
+                  }`}
+                />
+
+                <Button
+                  type="button"
+                  onClick={() => setCompletionFilter("incomplete")}
+                  aria-pressed={completionFilter === "incomplete"}
+                  icon={<FaRegCircle />}
+                  label="Incomplete"
+                  className={`${
+                    completionFilter === "incomplete"
+                      ? "bg-[var(--primary-color)] text-white"
+                      : "bg-[var(--primary-background)] text-[var(--primary-text-color)] hover:bg-gray-100"
+                  }`}
+                />
+              </div>
             </div>
           </div>
 
@@ -253,26 +335,24 @@ export default function Home() {
 
         {/*Tasks*/}
         <div className="flex flex-col w-full min-h-120 py-4 gap-3">
-          {filteredTasks.length === 0 ? (
+          {filteredAndSortedTasks.length === 0 ? (
             <p className="text-gray-400">
               {search
                 ? "No tasks match your search."
                 : "You don't have any tasks yet"}
             </p>
           ) : (
-            filteredTasks.map((t) => (
+            filteredAndSortedTasks.map((t) => (
               <TaskCard
                 key={t.id}
                 title={t.title}
                 date={t.deadline}
-                description={t.description}
                 color={t.color}
+                description={t.description}
                 icon="📝"
                 isDone={t.done}
                 onToggleDone={() => patchTask(t.id, { done: !t.done })}
-                onEdit={() => {
-                  handleOpenEdit(t);
-                }}
+                onEdit={() => handleOpenEdit(t)}
                 onDelete={() => removeTask(t.id)}
               />
             ))
