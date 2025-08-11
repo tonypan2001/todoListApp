@@ -220,13 +220,13 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex justify-content-between items-start w-full">
+        {/* <div className="flex justify-content-between items-start w-full">
           <div className="flex gap-2">
             <Button label="Coding" />
             <Button label="Workout" />
             <Button label="Dinner" />
           </div>
-        </div>
+        </div> */}
 
         {!isModalOpen && (
           <div className="fixed right-6 bottom-10 shadow-xl rounded-full z-50">
