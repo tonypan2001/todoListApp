@@ -5,7 +5,7 @@ import Input from "../components/Input";
 import TaskCard from "../components/TaskCard";
 import Container from "../components/Container";
 import { useTasks } from "../hooks/useTask";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Modal from "../components/Modal";
 import Dropdown from "../components/Dropdown";
 import DatePicker from "../components/DatePicker";
@@ -15,6 +15,7 @@ import type { Task } from "../types/api/task.types";
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null); // เก็บ task ที่จะ edit
+  const [search, setSearch] = useState("");
 
   // ฟอร์ม state
   const [title, setTitle] = useState("");
@@ -39,6 +40,24 @@ export default function Home() {
       setDeadline("");
     }
   }, [editingTask, isModalOpen, setDeadline]);
+
+  const { total, completed, remaining, percent } = useMemo(() => {
+    const total = tasks.length;
+    const completed = tasks.filter(t => t.done).length;
+    const remaining = total - completed;
+    const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+    return { total, completed, remaining, percent };
+  }, [tasks]);
+
+  // สร้างรายการที่ถูกกรองจาก search (กรองทั้ง title และ description)
+  const filteredTasks = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return tasks;
+    return tasks.filter(t =>
+      t.title.toLowerCase().includes(q) ||
+      t.description.toLowerCase().includes(q)
+    );
+  }, [search, tasks]);
 
   const handleOpenCreate = () => {
     setEditingTask(null);
@@ -148,26 +167,39 @@ export default function Home() {
           <div className="flex items-end justify-between w-full">
             <div className="flex flex-col justify-between items-start w-full">
               <h1>Search your tasks</h1>
-              <Input className="mt-2" placeholder="Type something..." />
+              <Input 
+              className="mt-2" 
+              placeholder="Type something..." 
+              value={search}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+              />
             </div>
             <div className="pl-2">
-              <Button icon={<FaSearch />} label="Search" />
+              <Button icon={<FaSearch />} label="Search" type="button"/>
             </div>
           </div>
 
           <div className="flex justify-start items-center w-full mt-2">
             <div className="w-[60px] h-[60px] flex items-center justify-center border-2 border-[var(--primary-success-color)] rounded-4xl shadow-lg">
               <h1 className="font-bold text-[var(--primary-success-color)]">
-                100%
+                {percent}%
               </h1>
             </div>
             <div className="flex flex-col ms-3">
               <p className="font-bold text-start text-sm md:text-xl">
-                Your have 1 task(s) to complete
+                You have {remaining} task(s) to complete
               </p>
               <p className="text-sm text-start">
-                No tasks completed yet. Keep going!
-              </p>
+                {completed === 0
+                    ? "No tasks completed yet. Keep going!"
+                    : `${completed}/${total} completed`}
+                </p>
+                {/* <div className="mt-2 h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                        className="h-full bg-[var(--primary-success-color)] transition-all duration-300"
+                        style={{ width: `${percent}%` }}
+                    />
+                </div> */}
             </div>
           </div>
         </div>
@@ -193,25 +225,28 @@ export default function Home() {
 
         {/*Tasks*/}
         <div className="flex flex-col w-full min-h-120 py-4 gap-3">
-          {tasks.length === 0 && (
-            <h1 className="text-gray-400">You don't have any tasks yet</h1>
+            {filteredTasks.length === 0 ? (
+            <p className="text-gray-400">
+              {search ? "No tasks match your search." : "You don't have any tasks yet"}
+            </p>
+          ) : (
+            filteredTasks.map((t) => (
+                <TaskCard
+                key={t.id}
+                title={t.title}
+                date={t.deadline}
+                description={t.description}
+                color={t.color}
+                icon="📝"
+                isDone={t.done}
+                onToggleDone={() => patchTask(t.id, { done: !t.done })}
+                onEdit={() => {
+                    handleOpenEdit(t);
+                }}
+                onDelete={() => removeTask(t.id)}
+                />
+            ))
           )}
-          {tasks.map((t) => (
-            <TaskCard
-              key={t.id}
-              title={t.title}
-              date={t.deadline}
-              description={t.description}
-              color={t.color}
-              icon="📝"
-              isDone={t.done}
-              onToggleDone={() => patchTask(t.id, { done: !t.done })}
-              onEdit={() => {
-                handleOpenEdit(t);
-              }}
-              onDelete={() => removeTask(t.id)}
-            />
-          ))}
         </div>
       </Container>
     </>

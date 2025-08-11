@@ -7,6 +7,7 @@ export type InputProps =
       defaultValue?: string;
       useTextArea?: false;
       onChange?: React.ChangeEventHandler<HTMLInputElement>;
+      value?: string;
     }
   | {
       label?: string;
@@ -16,4 +17,5 @@ export type InputProps =
       defaultValue?: string;
       useTextArea: true;
       onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+      value?: string;
     };
