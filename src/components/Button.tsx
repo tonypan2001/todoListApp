@@ -5,7 +5,7 @@ export default function Button(props: ButtonProps) {
     <button
       onClick={props.onClick}
       className={`
-                button flex justify-content-between gap-2 items-center px-4 py-2 rounded-xl cursor-pointer ${props.className}`}
+                button flex justify-content-between gap-2 items-center px-4 py-2 rounded-xl cursor-pointer duration-300 ${props.className}`}
       type={props.type}
     >
       {props.icon}
