@@ -1,6 +1,6 @@
 import type { Task } from "../types/api/task.types";
 
-const KEY = crypto.randomUUID();
+const KEY = "msw_tasks";
 
 export function loadTasks(): Task[] {
   try {
