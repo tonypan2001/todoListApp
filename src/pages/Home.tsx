@@ -5,7 +5,7 @@ import Input from "../components/Input";
 import TaskCard from "../components/TaskCard";
 import Container from "../components/Container";
 import { useTasks } from "../hooks/useTask";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import Dropdown from "../components/Dropdown";
 import DatePicker from "../components/DatePicker";
@@ -14,10 +14,31 @@ import type { Task } from "../types/api/task.types";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [deadline, setDeadline] = useState("");
   const [editingTask, setEditingTask] = useState<Task | null>(null); // เก็บ task ที่จะ edit
 
-  const { tasks, loading, error, patchTask, removeTask } = useTasks();
+  // ฟอร์ม state
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [color, setColor] = useState("#ff7d34"); // ค่าเริ่มต้น
+  const [deadline, setDeadline] = useState("");
+
+  const { tasks, loading, error, addTask, patchTask, removeTask } = useTasks();
+
+  // เมื่อเปิดแก้ไข ให้ prefill ฟอร์ม
+  useEffect(() => {
+    if (editingTask) {
+      setTitle(editingTask.title);
+      setDesc(editingTask.description);
+      setColor(editingTask.color);
+      setDeadline(editingTask.deadline ?? "");
+    } else {
+      // สร้าง: เคลียร์ฟอร์ม
+      setTitle("");
+      setDesc("");
+      setColor("#ff7d34");
+      setDeadline("");
+    }
+  }, [editingTask, isModalOpen, setDeadline]);
 
   const handleOpenCreate = () => {
     setEditingTask(null);
@@ -30,27 +51,77 @@ export default function Home() {
     setIsModalOpen(true);
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setEditingTask(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!title.trim()) return alert("Please enter title");
+    if (!deadline) return alert("Please select deadline");
+
+    try {
+      if (editingTask) {
+        // แก้ไข
+        await patchTask(editingTask.id, {
+          title,
+          description: desc,
+          color,
+          deadline,
+        });
+      } else {
+        // สร้างใหม่
+        await addTask({
+          title,
+          description: desc,
+          color,
+          deadline,
+          done: false,
+        });
+      }
+      closeModal();
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "Something went wrong";
+      alert(message);
+    }
+  };
+
   if (loading) return <p>Loading tasks…</p>;
   if (error) return <p className="text-red-600">Error: {error}</p>;
   return (
     <>
       {isModalOpen && (
-        <Modal label={editingTask ? "Edit Task" : "Create Task"} onClose={() => setIsModalOpen(false)}>
-          <form className="flex flex-col gap-2">
+        <Modal
+          label={editingTask ? "Edit Task" : "Create Task"}
+          onClose={closeModal}
+        >
+          <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-2 items-start">
               <label>Title</label>
-              <Input placeholder="Enter title" />
+              <Input
+                placeholder="Enter title"
+                defaultValue={editingTask?.title || ""}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </div>
             <div className="flex flex-col gap-2 items-start">
               <label>Task description</label>
-              <Input placeholder="Enter description" useTextArea={true} />
+              <Input
+                placeholder="Enter description"
+                useTextArea={true}
+                defaultValue={editingTask?.description || ""}
+                onChange={(e) => setDesc(e.target.value)}
+              />
             </div>
             <div className="flex flex-col gap-2 items-start">
               <label>Task color</label>
               <Dropdown
-                label="Choose a color"
-                items={["Red", "Green", "Blue"]}
-                // onSelect={handleSelect}
+                label={editingTask?.color || "Choose a color"}
+                items={["#f54b4b", "#34b7ff", "#22c55e", "#ffd364"]}
+                onSelect={(val) => setColor(val)}
               />
             </div>
             <div className="flex flex-col gap-2 items-start">
@@ -61,15 +132,15 @@ export default function Home() {
                 allowPast={false} // ไม่ให้เลือกวันในอดีต
               />
             </div>
+            <div className="flex items-center mt-4">
+                <Button
+                type="submit"
+                icon={<IoIosCreate />}
+                label={editingTask ? "Save Changes" : "Create Task"}
+                className="w-full text-2xl"
+                />
+            </div>
           </form>
-          <div className="flex items-center mt-4">
-            <Button
-              type="submit"
-              icon={<IoIosCreate />}
-              label="Create Task"
-              className="w-full text-2xl"
-            />
-          </div>
         </Modal>
       )}
       <Container className="relative flex-col items-start mt-4 gap-3">
@@ -112,10 +183,10 @@ export default function Home() {
         {!isModalOpen && (
           <div className="fixed right-6 bottom-10 shadow-xl rounded-full z-50">
             <Button
-              // label="Create Task"
+              label="Create Task"
               onClick={() => handleOpenCreate()}
               icon={<FaPlus />}
-              className="!rounded-full !p-6 text-2xl"
+              className="!rounded-full !p-6 text-lg"
             />
           </div>
         )}
@@ -131,10 +202,13 @@ export default function Home() {
               title={t.title}
               date={t.deadline}
               description={t.description}
+              color={t.color}
               icon="📝"
               isDone={t.done}
               onToggleDone={() => patchTask(t.id, { done: !t.done })}
-              onEdit={() => { handleOpenEdit(t) }}
+              onEdit={() => {
+                handleOpenEdit(t);
+              }}
               onDelete={() => removeTask(t.id)}
             />
           ))}

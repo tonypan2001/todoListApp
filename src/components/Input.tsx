@@ -15,6 +15,8 @@ export default function Input(props: InputProps) {
                     focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] bg-[var(--primary-input-background-color)]
                     ${props.error ? "border-[var(--primary-error-color)]" : "border-[var(--primary-border-color)]"}`}
           placeholder={props.placeholder}
+          defaultValue={props.defaultValue}
+          onChange={props.onChange}
         />
       )}
       {props.useTextArea && (
@@ -23,6 +25,8 @@ export default function Input(props: InputProps) {
                     focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] bg-[var(--primary-input-background-color)]
                     ${props.error ? "border-[var(--primary-error-color)]" : "border-[var(--primary-border-color)]"}`}
           placeholder={props.placeholder}
+          defaultValue={props.defaultValue}
+          onChange={props.onChange}
           rows={4}
         />
       )}

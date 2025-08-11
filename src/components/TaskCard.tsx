@@ -30,9 +30,10 @@ export default function TaskCard(props: TaskCardProps) {
       className={`flex items-start justify-between p-4 border-2 rounded-lg shadow-sm transition 
             ${
               props.isDone
-                ? "bg-[var(--secondary-background)] border-[var(--secondary-border-color)]"
+                ? "border-[var(--secondary-border-color)]"
                 : "bg-[var(--primary-background)] border-[var(--primary-border-color)] hover:shadow-md"
             }`}
+            style={{backgroundColor: props.color}}
     >
       {/* Left Section */}
       <div className="flex items-start gap-3 flex-1">
