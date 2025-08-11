@@ -13,7 +13,7 @@ export default function Input(props: InputProps) {
           className={`${props.className} 
                     w-full px-4 py-2 text-sm border-2 rounded-xl outline-none transition
                     focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] bg-[var(--primary-input-background-color)]
-                    ${props.error ? "border-red-500" : "border-gray-300"}`}
+                    ${props.error ? "border-[var(--primary-error-color)]" : "border-[var(--primary-border-color)]"}`}
           placeholder={props.placeholder}
         />
       )}
@@ -21,13 +21,13 @@ export default function Input(props: InputProps) {
         <textarea
           className={`w-full px-4 py-2 text-sm border-2 rounded-xl outline-none transition
                     focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] bg-[var(--primary-input-background-color)]
-                    ${props.error ? "border-red-500" : "border-gray-300"}`}
+                    ${props.error ? "border-[var(--primary-error-color)]" : "border-[var(--primary-border-color)]"}`}
           placeholder={props.placeholder}
           rows={4}
         />
       )}
       {props.error && (
-        <p className="mt-1 text-xs text-red-500">{props.error}</p>
+        <p className="mt-1 text-xs text-[var(--primary-error-color)]">{props.error}</p>
       )}
     </div>
   );

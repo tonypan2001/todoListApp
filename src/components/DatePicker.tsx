@@ -22,7 +22,7 @@ export default function DatePicker(props: DatePickerProps) {
       className={`${props.className} 
         w-full px-4 py-2 text-sm border-2 rounded-xl outline-none transition
         focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] bg-[var(--primary-input-background-color)]
-        ${props.error ? "border-red-500" : "border-gray-300"}`}
+        ${props.error ? "border-[var(--primary-error-color)]" : "border-[var(--primary-border-color)]"}`}
     />
   );
 }
