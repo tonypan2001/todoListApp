@@ -27,17 +27,17 @@ export default function TaskCard(props: TaskCardProps) {
 
   return (
     <div
-      className={`flex items-start justify-between p-4 border-2 rounded-lg shadow-sm transition 
+      className={`flex items-start justify-between p-4 rounded-lg border-1 border-[var(--primary-border-color)] shadow-sm transition 
             ${
               props.isDone
-                ? "border-[var(--secondary-border-color)]"
-                : "bg-[var(--primary-background)] border-[var(--primary-border-color)] hover:shadow-md"
+                ? ""
+                : "hover:shadow-xl"
             }`}
             style={{backgroundColor: props.color}}
     >
       {/* Left Section */}
-      <div className="flex items-start gap-3 flex-1">
-        <div className="text-[var(--primary-success-color)] mt-1">
+      <div className="relative flex items-start gap-3 flex-1">
+        <div className="text-[var(--primary-text-color)] mt-1">
           {props.isDone ? <FaCheckCircle /> : <FaRegCircle />}
         </div>
 
@@ -82,7 +82,7 @@ export default function TaskCard(props: TaskCardProps) {
       <div className="relative ml-4" ref={dropdownRef}>
         <button
           onClick={() => setDropdownOpen(!isDropdownOpen)}
-          className="p-2 text-gray-500 hover:text-gray-700 cursor-pointer"
+          className="p-2 text-[var(--primary-text-color)] hover:text-gray-700 cursor-pointer"
           aria-label="Task Menu"
         >
           <FaEllipsisV />

@@ -24,6 +24,11 @@
   --primary-success-color: #00c868;
   --primary-blue-color: #1278ff;
   --primary-error-color: #e12424;
+
+  --task-red-color: #df2929;
+  --task-green-color: #2acd01;
+  --task-blue-color: #00a6ff;
+  --task-yello-color: #ffb700;
 }
 
 /* Dark theme overrides */
