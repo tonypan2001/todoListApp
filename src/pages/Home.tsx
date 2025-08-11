@@ -10,19 +10,32 @@ import Modal from "../components/Modal";
 import Dropdown from "../components/Dropdown";
 import DatePicker from "../components/DatePicker";
 import { IoIosCreate } from "react-icons/io";
+import type { Task } from "../types/api/task.types";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deadline, setDeadline] = useState("");
+  const [editingTask, setEditingTask] = useState<Task | null>(null); // เก็บ task ที่จะ edit
 
   const { tasks, loading, error, patchTask, removeTask } = useTasks();
+
+  const handleOpenCreate = () => {
+    setEditingTask(null);
+    setIsModalOpen(true);
+  };
+
+  const handleOpenEdit = (task: Task) => {
+    setEditingTask(task);
+    setDeadline(task.deadline || "");
+    setIsModalOpen(true);
+  };
 
   if (loading) return <p>Loading tasks…</p>;
   if (error) return <p className="text-red-600">Error: {error}</p>;
   return (
     <>
       {isModalOpen && (
-        <Modal label="Create Task" onClose={() => setIsModalOpen(false)}>
+        <Modal label={editingTask ? "Edit Task" : "Create Task"} onClose={() => setIsModalOpen(false)}>
           <form className="flex flex-col gap-2">
             <div className="flex flex-col gap-2 items-start">
               <label>Title</label>
@@ -100,7 +113,7 @@ export default function Home() {
           <div className="fixed right-6 bottom-10 shadow-xl rounded-full z-50">
             <Button
               // label="Create Task"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => handleOpenCreate()}
               icon={<FaPlus />}
               className="!rounded-full !p-6 text-2xl"
             />
@@ -109,7 +122,9 @@ export default function Home() {
 
         {/*Tasks*/}
         <div className="flex flex-col w-full min-h-120 py-4 gap-3">
-          {/* <h1 className="text-gray-400">You don't have any tasks yet</h1> */}
+          {tasks.length === 0 && (
+            <h1 className="text-gray-400">You don't have any tasks yet</h1>
+          )}
           {tasks.map((t) => (
             <TaskCard
               key={t.id}
@@ -119,9 +134,7 @@ export default function Home() {
               icon="📝"
               isDone={t.done}
               onToggleDone={() => patchTask(t.id, { done: !t.done })}
-              onEdit={() => {
-                /* เปิด modal แล้วเรียก patchTask หลัง submit */
-              }}
+              onEdit={() => { handleOpenEdit(t) }}
               onDelete={() => removeTask(t.id)}
             />
           ))}
