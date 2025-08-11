@@ -154,7 +154,7 @@ export default function Home() {
               <label>Task color</label>
               <Dropdown
                 label={editingTask?.color || "Choose a color"}
-                items={["#df2929", "#00a6ff", "#2acd01", "#ffb700"]}
+                items={["#e64747", "#00a6ff", "#2acd01", "#ffb700"]}
                 onSelect={(val) => setColor(val)}
               />
             </div>
