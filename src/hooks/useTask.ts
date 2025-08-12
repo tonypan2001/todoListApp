@@ -12,8 +12,25 @@ export function useTasks() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const refetch = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const res = await fetch("/api/tasks");
+      if (!res.ok) throw new Error("Failed to load tasks");
+      const data: Task[] = await res.json();
+      setTasks(data);
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Load error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   // load ครั้งแรก
   useEffect(() => {
+    refetch();
     (async () => {
       try {
         setLoading(true);
@@ -43,5 +60,5 @@ export function useTasks() {
     setTasks((prev) => prev.filter((t) => t.id !== id));
   };
 
-  return { tasks, loading, error, addTask, patchTask, removeTask };
+  return { tasks, loading, error, addTask, patchTask, removeTask, refetch };
 }
