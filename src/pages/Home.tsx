@@ -17,6 +17,8 @@ import Dropdown from "../components/Dropdown";
 import DatePicker from "../components/DatePicker";
 import { IoIosCreate } from "react-icons/io";
 import type { Task } from "../types/api/task.types";
+import SkeletonLoading from "../components/SkeletonLoading";
+import ErrorState from "../components/ErrorState";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,7 +39,7 @@ export default function Home() {
   const [color, setColor] = useState(defaultColor); // ค่าเริ่มต้น
   const [deadline, setDeadline] = useState("");
 
-  const { tasks, loading, error, addTask, patchTask, removeTask } = useTasks();
+  const { tasks, loading, error, addTask, patchTask, removeTask, refetch } = useTasks();
 
   const [errors, setErrors] = useState<{ title?: string; deadline?: string }>(
     {}
@@ -158,8 +160,21 @@ export default function Home() {
     }
   };
 
-  if (loading) return <p>Loading tasks…</p>;
-  if (error) return <p className="text-red-600">Error: {error}</p>;
+  if (loading) {
+    return (
+      <Container className="relative flex-col items-start mt-4 gap-3">
+        <h1 className="text-lg font-semibold mb-2">Loading tasks…</h1>
+        <SkeletonLoading />
+      </Container>
+    );
+  }
+  if (error) {
+    return (
+      <Container className="relative flex-col items-start mt-4 gap-3">
+        <ErrorState message={error} onRetry={refetch} />
+      </Container>
+    );
+  }
   return (
     <>
       {isModalOpen && (
