@@ -35,14 +35,15 @@ This project demonstrates fetching, creating, editing, deleting, filtering, and 
 ---
 
 ## 📦 Installation & Run
-
+```
 git clone https://github.com/tonypan2001/todoListApp.git
+
 cd todoListApp
 
 npm install
 
 npm run dev
-
+```
 Serve app at http://localhost:5173
 
 ## Example
