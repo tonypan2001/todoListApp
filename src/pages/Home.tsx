@@ -304,23 +304,9 @@ export default function Home() {
                   ? "No tasks completed yet. Keep going!"
                   : `${completed}/${total} completed`}
               </p>
-              {/* <div className="mt-2 h-2 w-full bg-gray-200 rounded-full overflow-hidden">
-                    <div
-                        className="h-full bg-[var(--primary-success-color)] transition-all duration-300"
-                        style={{ width: `${percent}%` }}
-                    />
-                </div> */}
             </div>
           </div>
         </div>
-
-        {/* <div className="flex justify-content-between items-start w-full">
-          <div className="flex gap-2">
-            <Button label="Coding" />
-            <Button label="Workout" />
-            <Button label="Dinner" />
-          </div>
-        </div> */}
 
         {!isModalOpen && (
           <div className="fixed right-6 bottom-10 shadow-xl rounded-full z-50">
