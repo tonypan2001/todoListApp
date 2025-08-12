@@ -28,7 +28,7 @@ export default function Home() {
   // desc = ล่าสุดก่อน, asc = เก่าสุดก่อน
   const [dateOrder, setDateOrder] = useState<"desc" | "asc">("desc");
   const [completionFilter, setCompletionFilter] = useState<
-    "all" | "complete" | "incomplete"
+    "all" | "done" | "undone"
   >("all");
 
   // ฟอร์ม state
@@ -80,9 +80,9 @@ export default function Home() {
       : tasks;
 
     // 2) กรองตามสถานะ
-    if (completionFilter === "complete") {
+    if (completionFilter === "done") {
       list = list.filter((t) => t.done);
-    } else if (completionFilter === "incomplete") {
+    } else if (completionFilter === "undone") {
       list = list.filter((t) => !t.done);
     }
 
@@ -232,7 +232,7 @@ export default function Home() {
                 }
               />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mt-2 py-1">
               <Button
                 icon={<FaCalendarAlt />}
                 type="button"
@@ -245,9 +245,9 @@ export default function Home() {
                 className="whitespace-nowrap"
               />
 
-              <div className="w-[1px] h-8 bg-[var(--primary-border-color)]"></div>
+              <div className="w-[1px] h-8 bg-[var(--primary-border-color)] hidden md:block"></div>
 
-              <div className="flex items-center rounded-xl overflow-hidden gap-1">
+              <div className="flex items-center rounded-xl overflow-hidden gap-2">
                 <Button
                   type="button"
                   onClick={() => setCompletionFilter("all")}
@@ -255,33 +255,33 @@ export default function Home() {
                   label="All"
                   className={`${
                     completionFilter === "all"
-                      ? "bg-[var(--primary-color)] text-white"
+                      ? "bg-[var(--primary-color)] border-2 border-[var(--secondary-color)]"
                       : "bg-[var(--primary-background)] text-[var(--primary-text-color)] hover:bg-gray-100"
                   }`}
                 />
 
                 <Button
                   type="button"
-                  onClick={() => setCompletionFilter("complete")}
-                  aria-pressed={completionFilter === "complete"}
+                  onClick={() => setCompletionFilter("done")}
+                  aria-pressed={completionFilter === "done"}
                   icon={<FaCheckCircle />}
-                  label="Complete"
+                  label="Done"
                   className={`${
-                    completionFilter === "complete"
-                      ? "bg-[var(--primary-color)] text-white"
+                    completionFilter === "done"
+                      ? "bg-[var(--primary-color)] border-2 border-[var(--secondary-color)]"
                       : "bg-[var(--primary-background)] text-[var(--primary-text-color)] hover:bg-gray-100"
                   }`}
                 />
 
                 <Button
                   type="button"
-                  onClick={() => setCompletionFilter("incomplete")}
-                  aria-pressed={completionFilter === "incomplete"}
+                  onClick={() => setCompletionFilter("undone")}
+                  aria-pressed={completionFilter === "undone"}
                   icon={<FaRegCircle />}
-                  label="Incomplete"
+                  label="Undone"
                   className={`${
-                    completionFilter === "incomplete"
-                      ? "bg-[var(--primary-color)] text-white"
+                    completionFilter === "undone"
+                      ? "bg-[var(--primary-color)] border-2 border-[var(--secondary-color)]"
                       : "bg-[var(--primary-background)] text-[var(--primary-text-color)] hover:bg-gray-100"
                   }`}
                 />
