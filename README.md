@@ -1,69 +1,48 @@
-# React + TypeScript + Vite
+# 📝 Todo List App (React + TypeScript + MSW)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple Todo List application built with **React Functional Components**, **TypeScript**, and **Mock API** using **MSW (Mock Service Worker)**.  
+This project demonstrates fetching, creating, editing, deleting, filtering, and toggling tasks between **Done** and **Not Done**, with a professional UI including skeleton loading, error states, and retry functionality.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+- **Display tasks from API** (MSW mock API simulating backend)
+- **Create / Edit / Delete tasks**
+- **Toggle task status** (Done / Not Done)
+- **Filter tasks** by:
+  - Search keyword
+  - Completion status (All / Complete / Incomplete)
+  - Date sorting (Latest / Oldest)
+- **Persistent data** in localStorage (via MSW in-browser storage)
+- **UI Enhancements**
+  - Skeleton loader during fetching
+  - Error state with Retry button
+  - Modal form for create/edit
+  - Color picker for task label
+  - Date picker (with option to disallow past dates)
+- **State management** using React local state + custom hooks
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠 Tech Stack
+- **Frontend**: React + TypeScript + Vite
+- **Styling**: Tailwind CSS
+- **Mock API**: MSW (Mock Service Worker)
+- **State Management**: React hooks (`useState`, `useEffect`)
+- **Icons**: React Icons
+- **Date Picker**: Custom React component
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 📦 Installation & Run
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 1️⃣ Clone this repo
+```bash
+git clone https://github.com/tonypan2001/todoListApp.git
+cd todoListApp
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+npm install
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+npm run dev
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Serve app at http://localhost:5173
