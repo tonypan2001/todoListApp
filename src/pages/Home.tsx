@@ -324,7 +324,7 @@ export default function Home() {
         </div>
 
         {!isModalOpen && (
-          <div className="fixed right-6 bottom-10 shadow-xl rounded-full z-50">
+          <div className="fixed right-6 bottom-6 shadow-xl rounded-full z-50">
             <Button
               label="Create Task"
               onClick={() => handleOpenCreate()}
