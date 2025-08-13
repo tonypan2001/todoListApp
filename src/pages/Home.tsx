@@ -233,7 +233,7 @@ export default function Home() {
           </form>
         </Modal>
       )}
-      <Container className="relative flex-col items-start mt-4 gap-3">
+      <Container className="relative flex-col items-start mt-4 mb-10 gap-3">
         <div className="flex flex-col justify-between w-full gap-4">
           <div className="flex flex-col items-start justify-between w-full gap-2">
             <div className="flex flex-col justify-between items-start w-full">
