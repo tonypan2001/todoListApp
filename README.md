@@ -15,7 +15,6 @@ This project demonstrates fetching, creating, editing, deleting, filtering, and 
   - Date sorting (Latest / Oldest)
 - **Persistent data** in localStorage (via MSW in-browser storage)
 - **UI Enhancements**
-  - Skeleton loader during fetching
   - Error state with Retry button
   - Modal form for create/edit
   - Color picker for task label
