@@ -40,6 +40,8 @@ git clone https://github.com/tonypan2001/todoListApp.git
 
 cd todoListApp
 
+cp .env.example .env
+
 npm install
 
 npm run dev
